@@ -1,0 +1,36 @@
+plugins {
+    id 'base'
+    // see https://fabricmc.net/develop/ for new versions
+    id 'fabric-loom' version '1.10-SNAPSHOT' apply false
+    // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
+    id 'net.neoforged.moddev' version '2.0.107' apply false
+}
+
+apply plugin: 'idea'
+idea {
+    module {
+        downloadSources = true
+    }
+}
+
+
+tasks.register('collectJars', Copy) {
+    dependsOn(":fabric:build", ":neoforge_coremod:build")
+
+    from("fabric/build/libs") {
+        include '*.jar'
+        exclude '*-sources.jar', '*-javadoc.jar', '*-dev-shadow.jar'
+    }
+
+    from("neoforge_coremod/build/libs") {
+        include '*.jar'
+        exclude '*-sources.jar', '*-javadoc.jar', '*-dev-shadow.jar'
+        rename { originalName ->
+            originalName.replace("_coremod", "")
+        }
+    }
+
+    into("$rootDir/build/libs")
+}
+
+build.finalizedBy(collectJars)
