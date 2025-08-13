@@ -11,7 +11,6 @@ import cpw.mods.modlauncher.api.ITransformer;
 import io.github.thebossmagnus.mods.config_manager.common_coremod.CopyConfig;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.util.List;
 import java.util.Set;
 

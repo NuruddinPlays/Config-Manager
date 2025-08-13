@@ -10,7 +10,6 @@ import net.neoforged.neoforgespi.locating.IDependencyLocator;
 import net.neoforged.neoforgespi.locating.IDiscoveryPipeline;
 import net.neoforged.neoforgespi.locating.IModFile;
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
