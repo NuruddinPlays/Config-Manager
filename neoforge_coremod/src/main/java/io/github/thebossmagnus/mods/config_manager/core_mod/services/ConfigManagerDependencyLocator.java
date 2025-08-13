@@ -1,3 +1,6 @@
+/**
+ * Adapted from https://github.com/KostromDan/Crash-Assistant, LGPL-3.0
+ */
 package io.github.thebossmagnus.mods.config_manager.core_mod.services;
 
 import cpw.mods.jarhandling.SecureJar;
@@ -7,6 +10,7 @@ import net.neoforged.neoforgespi.locating.IDependencyLocator;
 import net.neoforged.neoforgespi.locating.IDiscoveryPipeline;
 import net.neoforged.neoforgespi.locating.IModFile;
 import org.slf4j.Logger;
+
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;

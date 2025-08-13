@@ -1,3 +1,8 @@
+/**
+ * Adapted from https://github.com/KostromDan/Crash-Assistant, LGPL-3.0
+ */
+
+
 package io.github.thebossmagnus.mods.config_manager.core_mod.services;
 
 import cpw.mods.modlauncher.api.IEnvironment;
@@ -11,15 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * CrashAssistantApp should be launched as soon as possible after game start
+ * The mod should be launched as soon as possible after game start
  * to be able to help players even with coremod/mixin/hs_err crashes.
  * So we launch it from initialize of ITransformationService, the first point, we can launch it from forge mod.
  */
 public class ConfigManagerTransformationService implements ITransformationService {
 
     public ConfigManagerTransformationService() {
-        // This constructor is intentionally empty.
-        // Initialization is handled in the initialize method.
     }
 
     @Override
