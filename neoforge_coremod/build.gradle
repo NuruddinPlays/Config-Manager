@@ -42,6 +42,7 @@ jar {
     exclude("config_manager.neoforge.mixins.json")
     exclude("io/github/thebossmagnus/mods/config_manager/neoforge/**")
     exclude("io/github/thebossmagnus/mods/config_manager/common/**")
+
 }
 
 neoForge {

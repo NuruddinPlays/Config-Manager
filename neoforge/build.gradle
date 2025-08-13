@@ -3,6 +3,9 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+jar{
+    exclude("io/github/thebossmagnus/mods/config_manager/common_coremod/**")
+}
 
 neoForge {
     version = neoforge_version
@@ -38,3 +41,7 @@ neoForge {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.java {
+    exclude 'io/github/thebossmagnus/mods/config_manager_coremod/**'
+    exclude 'io/github/thebossmagnus/mods/config_manager/common_coremod/**'
+}

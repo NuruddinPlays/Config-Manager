@@ -3,7 +3,7 @@ package io.github.thebossmagnus.mods.config_manager.core_mod.services;
 import cpw.mods.modlauncher.api.IEnvironment;
 import cpw.mods.modlauncher.api.ITransformationService;
 import cpw.mods.modlauncher.api.ITransformer;
-import io.github.thebossmagnus.mods.config_manager.common.CopyConfig;
+import io.github.thebossmagnus.mods.config_manager.common_coremod.CopyConfig;
 import org.jetbrains.annotations.NotNull;
 
 
