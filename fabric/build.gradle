@@ -6,7 +6,7 @@ plugins {
 }
 
 base {
-    archivesName = "CrashAssistant-${project.name}-1.21.5-1.21.8"
+    archivesName = "ConfigManager-${project.name}-1.21.5-1.21.8"
 }
 
 configurations {
@@ -32,7 +32,7 @@ dependencies {
 shadowJar {
     configurations = [project.configurations.shadowBundle]
     archiveClassifier.set('dev-shadow')
-    relocate 'com.electronwill.nightconfig', 'dev.kostromdan.mods.crash_assistant.nightconfig'
+    relocate 'com.electronwill.nightconfig', 'io.github.thebossmagnus.mods.config_manager.nightconfig'
 }
 
 jar {

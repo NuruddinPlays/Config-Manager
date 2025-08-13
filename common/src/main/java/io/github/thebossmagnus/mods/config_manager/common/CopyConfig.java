@@ -1,10 +1,10 @@
-package dev.kostromdan.mods.crash_assistant.common;
+package io.github.thebossmagnus.mods.config_manager.common;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class CrashAssistant {
-    public static final String MOD_ID = "crash_assistant";
+public final class CopyConfig {
+    public static final String MOD_ID = "config_manager";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static void init() {

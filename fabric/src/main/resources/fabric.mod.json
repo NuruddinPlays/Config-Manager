@@ -7,33 +7,24 @@
     "authors": [
         "${mod_author}"
     ],
-    "contact": {
-        "homepage": "https://www.curseforge.com/minecraft/mc-mods/crash-assistant",
-        "sources": "https://github.com/KostromDan/Crash-Assistant",
-        "issues": "https://github.com/KostromDan/Crash-Assistant/issues"
-    },
     "license": "${license}",
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "preLaunch": [
-            "dev.kostromdan.mods.crash_assistant.fabric.pre_launch.CrashAssistantPreLaunch"
+          "io.github.thebossmagnus.mods.config_manager.fabric.pre_launch.ConfigManagerPreLaunch"
         ],
         "main": [
-            "dev.kostromdan.mods.crash_assistant.fabric.CrashAssistantFabric"
+          "io.github.thebossmagnus.mods.config_manager.fabric.ConfigManagerFabric"
         ],
         "client": [
-            "dev.kostromdan.mods.crash_assistant.fabric.client.CrashAssistantFabricClient"
+          "io.github.thebossmagnus.mods.config_manager.fabric.client.ConfigManagerFabricClient"
         ]
     },
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
-        "fabric-api": "*",
         "minecraft": "${minecraft_version_range_fabric}",
         "java": ">=${java_version}"
-    },
-    "suggests": {
-        "another-mod": "*"
     }
 }
   
