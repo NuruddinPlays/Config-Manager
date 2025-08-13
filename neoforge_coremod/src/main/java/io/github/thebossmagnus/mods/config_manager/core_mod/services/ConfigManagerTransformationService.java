@@ -17,6 +17,11 @@ import java.util.Set;
  */
 public class ConfigManagerTransformationService implements ITransformationService {
 
+    public ConfigManagerTransformationService() {
+        // This constructor is intentionally empty.
+        // Initialization is handled in the initialize method.
+    }
+
     @Override
     public @NotNull String name() {
         return "config_manager";
