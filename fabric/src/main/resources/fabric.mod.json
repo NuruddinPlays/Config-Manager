@@ -11,9 +11,6 @@
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
-        "preLaunch": [
-          "io.github.thebossmagnus.mods.config_manager.fabric.pre_launch.ConfigManagerPreLaunch"
-        ],
         "main": [
           "io.github.thebossmagnus.mods.config_manager.fabric.ConfigManagerFabric"
         ],
@@ -21,6 +18,9 @@
           "io.github.thebossmagnus.mods.config_manager.fabric.client.ConfigManagerFabricClient"
         ]
     },
+  "languageAdapters": {
+    "config_manager": "io.github.thebossmagnus.mods.config_manager.fabric.ConfigManagerLanguageAdapter"
+  },
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "minecraft": "${minecraft_version_range_fabric}",

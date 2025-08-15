@@ -22,6 +22,7 @@ import java.util.Set;
 public class ConfigManagerTransformationService implements ITransformationService {
 
     public ConfigManagerTransformationService() {
+        CopyConfig.init();
     }
 
     @Override
@@ -31,12 +32,10 @@ public class ConfigManagerTransformationService implements ITransformationServic
 
     @Override
     public void initialize(IEnvironment environment) {
-        CopyConfig.init();
     }
 
     @Override
     public void onLoad(IEnvironment env, Set<String> otherServices) {
-
     }
 
     @Override
