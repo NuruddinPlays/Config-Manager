@@ -6,7 +6,7 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
-jar{
+jar {
     exclude("io/github/thebossmagnus/mods/config_manager/common_coremod/**")
 }
 

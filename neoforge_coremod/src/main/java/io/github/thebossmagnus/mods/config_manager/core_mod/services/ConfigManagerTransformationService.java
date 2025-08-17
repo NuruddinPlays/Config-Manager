@@ -11,8 +11,6 @@ import cpw.mods.modlauncher.api.ITransformer;
 import io.github.thebossmagnus.mods.config_manager.common_coremod.CopyConfig;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
