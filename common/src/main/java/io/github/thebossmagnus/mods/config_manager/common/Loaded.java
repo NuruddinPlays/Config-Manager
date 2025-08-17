@@ -9,6 +9,6 @@ public class Loaded {
 
 
     public static void loade() {
-        LOGGER.info("Loaded");
+        LOGGER.info("Loaded: {}", Services.PLATFORM.getGameDir());
     }
 }

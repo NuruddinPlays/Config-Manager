@@ -9,7 +9,10 @@ import cpw.mods.modlauncher.api.IEnvironment;
 import cpw.mods.modlauncher.api.ITransformationService;
 import cpw.mods.modlauncher.api.ITransformer;
 import io.github.thebossmagnus.mods.config_manager.common_coremod.CopyConfig;
+import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Set;
@@ -17,13 +20,12 @@ import java.util.Set;
 /**
  * The mod should be launched as soon as possible after game start
  * to be able to help players even with coremod/mixin/hs_err crashes.
- * So we launch it from initialize of ITransformationService, the first point, we can launch it from forge mod.
+ * So we launch it from initialize of ITransformationService, the first point, we can launch it from neoforge mod.
+ * We can't use the constructor, even if it runs a bit earlier because some things we need aren't yet initialized
+ * E.g. FMLLoader.getGamePath() returns null
  */
 public class ConfigManagerTransformationService implements ITransformationService {
 
-    public ConfigManagerTransformationService() {
-        CopyConfig.init();
-    }
 
     @Override
     public @NotNull String name() {
@@ -32,10 +34,12 @@ public class ConfigManagerTransformationService implements ITransformationServic
 
     @Override
     public void initialize(IEnvironment environment) {
+
     }
 
     @Override
     public void onLoad(IEnvironment env, Set<String> otherServices) {
+        CopyConfig.init(FMLLoader.getGamePath());
     }
 
     @Override
