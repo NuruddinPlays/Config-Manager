@@ -32,12 +32,13 @@ public class ConfigManagerTransformationService implements ITransformationServic
 
     @Override
     public void initialize(IEnvironment environment) {
+        CopyConfig.init(FMLLoader.getGamePath());
 
     }
 
     @Override
     public void onLoad(IEnvironment env, Set<String> otherServices) {
-        CopyConfig.init(FMLLoader.getGamePath());
+
     }
 
     @Override
