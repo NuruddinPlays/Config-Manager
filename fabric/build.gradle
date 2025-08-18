@@ -25,6 +25,7 @@ dependencies {
 
     shadowBundle 'com.electronwill.night-config:toml:3.6.4'
     shadowBundle 'com.electronwill.night-config:json:3.6.4'
+    modImplementation "maven.modrinth:modmenu:${project.modmenu_version}"
 }
 
 shadowJar {
