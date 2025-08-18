@@ -19,7 +19,7 @@ import java.util.Set;
  * The mod should be launched as soon as possible after game start
  * to be able to help players even with coremod/mixin/hs_err crashes.
  * So we launch it from initialize of ITransformationService, the first point, we can launch it from neoforge mod.
- * We can't use the constructor, even if it runs a bit earlier because some things we need aren't yet initialized
+ * We can't use the constructor/onLoad, even if it runs a bit earlier, because some things aren't yet initialized
  * E.g. FMLLoader.getGamePath() returns null
  */
 public class ConfigManagerTransformationService implements ITransformationService {
