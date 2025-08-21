@@ -5,12 +5,14 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Widget for rendering multi-line text with formatting in Minecraft GUIs.
+ * Widget for rendering multi-line text with automatic word wrapping and formatting in Minecraft GUIs.
  */
 public class MultilineLabelWidget implements Renderable {
     private final Font font;
@@ -27,7 +29,7 @@ public class MultilineLabelWidget implements Renderable {
      * @param text The text component to display (can contain formatting and siblings)
      * @param x X position of the widget
      * @param y Y position of the widget
-     * @param width Width of the widget (used for centering)
+     * @param width Width of the widget (used for wrapping and centering)
      * @param centered Whether to center the text horizontally
      */
     public MultilineLabelWidget(Font font, Component text, int x, int y, int width, boolean centered) {
@@ -39,37 +41,37 @@ public class MultilineLabelWidget implements Renderable {
         this.centered = centered;
     }
 
-
+    /**
+     * Renders the multi-line label with automatic word wrapping.
+     *
+     * @param guiGraphics The graphics context
+     * @param mouseX Mouse X position
+     * @param mouseY Mouse Y position
+     * @param partialTick Partial tick
+     */
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
-        // Make a list with text and it's siblings
+        // Collect the main text and its siblings (extra components attached to the main one)
         List<Component> allComponents = new ArrayList<>();
         allComponents.add(text);
         allComponents.addAll(text.getSiblings());
 
-        List<MutableComponent> OutputLines = new ArrayList<>();
+        List<FormattedCharSequence> outputLines = new ArrayList<>();
 
-        // For each component, split by '\n' and preserve style
+        // For each component, use font.split to wrap text to the specified width
         for (Component comp : allComponents) {
-            String textContent = comp.getString();
-            String[] split = textContent.split("\\n", -1);
-            for (String part : split) {
-                if (!part.isEmpty()) {
-                    // Each line preserves the style of its originating component
-                    MutableComponent line = Component.literal(part).withStyle(comp.getStyle());
-                    OutputLines.add(line);
-                }
-            }
+            // font.split returns a list of FormattedCharSequence, each fitting within the width
+            List<FormattedCharSequence> wrapped = font.split(comp, width);
+            outputLines.addAll(wrapped);
         }
 
         int currentY = y;
-        for (MutableComponent lineComponent : OutputLines) {
+        for (FormattedCharSequence line : outputLines) {
             int drawX = centered ? x + width / 2 : x;
             if (centered) {
-                guiGraphics.drawCenteredString(font, lineComponent, drawX, currentY, 0xFFFFFFFF);
+                guiGraphics.drawCenteredString(font, line, drawX, currentY, 0xFFFFFFFF);
             } else {
-                guiGraphics.drawString(font, lineComponent, drawX, currentY, 0xFFFFFFFF);
+                guiGraphics.drawString(font, line, drawX, currentY, 0xFFFFFFFF);
             }
             currentY += font.lineHeight + 5;
         }
