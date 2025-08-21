@@ -11,47 +11,76 @@ import org.apache.logging.log4j.Logger;
 
 public class TestGui extends Screen {
     public static final Logger LOGGER = LogManager.getLogger();
-    private static final int buttonWidth = 100;
+    private static final int buttonWidth = 150;
     private static final int buttonHeight = 20;
 
-    private MultilineLabelWidget multilineLabel;
+    private MultilineLabelWidget l1;
+    private MultilineLabelWidget l2;
+
+
 
     public TestGui(Screen screen) {
-        super(Component.translatable("Title"));
+        super(Component.translatable("config_manager.title"));
     }
 
+    private final Component updateWarnings = Component.translatable("* %s\n* %s",
+        Component.translatable("config_manager.warning.lose_some_config"),
+        Component.translatable("config_manager.warning.game_restart")
+    );
+
+    private final Component resetWarnings = Component.translatable("* %s\n* %s",
+            Component.translatable("config_manager.warning.lose_all_config"),
+            Component.translatable("config_manager.warning.game_restart")
+    );
 
     @Override
     protected void init() {
-        Button testButton = Button.builder(Component.translatable("WOW a button"), (btn) -> {
+        Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
             LOGGER.info("The button can be pressed, wow^2!");
 
-        }).pos(0,0).size(100,20).size(buttonWidth, buttonHeight).build();
-        Button closeButton = Button.builder(Component.translatable("Close"), (btn) -> {
+        }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
+
+        Button b2 = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
+            LOGGER.info("The button can be pressed, wow^2!");
+
+        }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
+
+        Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
             this.onClose();
 
-        }).pos((int) ((this.width-buttonWidth)*0.5), (int) ((this.height-buttonHeight)*0.9)).size(buttonWidth, buttonHeight).build();
-        this.addRenderableWidget(testButton);
+        }).pos((int) ((this.width - buttonWidth) * 0.5), (int) ((this.height - buttonHeight) * 0.95)).size(buttonWidth, buttonHeight).build();
+
+        this.addRenderableWidget(b2);
+        this.addRenderableWidget(b1);
         this.addRenderableWidget(closeButton);
 
-        multilineLabel = new MultilineLabelWidget(
-            this.font,
-            Component.translatable("testgui.multiline"),
-            0,
-            33,
-            this.width,
-            true
+        l1 = new MultilineLabelWidget(
+                this.font,
+                updateWarnings,
+                (int) ((this.width - buttonWidth) * 0.15),
+                (int) ((this.height - buttonHeight) * 0.7)-90,
+                buttonWidth,
+                true
+        );
+
+        l2 = new MultilineLabelWidget(
+                this.font,
+                resetWarnings,
+                (int) ((this.width - buttonWidth) * 0.9),
+                (int) ((this.height - buttonHeight) * 0.7)-90,
+                buttonWidth,
+                true
         );
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        if (multilineLabel != null) {
-            multilineLabel.render(guiGraphics, mouseX, mouseY, partialTick);
+        if (l1 != null && l2 != null) {
+            l1.render(guiGraphics, mouseX, mouseY, partialTick);
+            l2.render(guiGraphics, mouseX, mouseY, partialTick);
         }
     }
-
 
 
     @Override

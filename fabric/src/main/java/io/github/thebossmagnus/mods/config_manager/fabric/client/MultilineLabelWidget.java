@@ -73,7 +73,7 @@ public class MultilineLabelWidget implements Renderable {
             } else {
                 guiGraphics.drawString(font, line, drawX, currentY, 0xFFFFFFFF);
             }
-            currentY += font.lineHeight + 5;
+            currentY += font.lineHeight +1;
         }
     }
 }
