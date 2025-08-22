@@ -1,17 +1,16 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static io.github.thebossmagnus.mods.config_manager.common.Loaded.LOGGER;
+
 public final class CopyConfig {
-    public static final String MOD_ID = "config_manager";
-    public static final Logger LOGGER = LogManager.getLogger();
-    public static final String dirName = "modpacks_defaults";
+
+    private static final String dirName = "modpacks_defaults";
 
     public static void init(Path gameDir) {
         LOGGER.info("Test: ConfigManager initialized successfully, path: {}", gameDir.toString());
