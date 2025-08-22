@@ -1,14 +1,12 @@
-package io.github.thebossmagnus.mods.config_manager.fabric.client;
+package io.github.thebossmagnus.mods.config_manager.common.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

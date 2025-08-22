@@ -1,4 +1,4 @@
-package io.github.thebossmagnus.mods.config_manager.fabric.client;
+package io.github.thebossmagnus.mods.config_manager.common.screen;
 
 
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class TestGui extends Screen {
+public class Gui extends Screen {
     public static final Logger LOGGER = LogManager.getLogger();
     private static final int buttonWidth = 150;
     private static final int buttonHeight = 20;
@@ -19,7 +19,7 @@ public class TestGui extends Screen {
 
 
 
-    public TestGui(Screen screen) {
+    public Gui(Screen screen) {
         super(Component.translatable("config_manager.title"));
     }
 
