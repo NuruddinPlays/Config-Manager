@@ -1,6 +1,8 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 import io.github.thebossmagnus.mods.config_manager.common.Services;
+import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.stream.Stream;
@@ -15,8 +17,7 @@ public final class ResetAndCopyConfig {
     /**
      * Deletes all files and folders in config except modpacks_defaults, then copies files from modpacks_defaults.
      */
-    public static void run() {
-        Path gameDir = Services.PLATFORM.getGameDir();
+    public static void run(Path gameDir, Logger logger) {
         Path configDir = gameDir.resolve("config");
         Path defaultsDir = configDir.resolve(DIR_NAME);
         if (!Files.exists(defaultsDir)) {
@@ -45,6 +46,7 @@ public final class ResetAndCopyConfig {
                     throw new RuntimeException("Error copying " + source + " to " + target, e);
                 }
             });
+            logger.info("Config files re-setted");
         } catch (IOException e) {
             throw new RuntimeException("Failed to copy modpack_defaults", e);
         }

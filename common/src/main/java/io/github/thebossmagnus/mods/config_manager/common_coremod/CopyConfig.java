@@ -13,7 +13,7 @@ public final class CopyConfig {
     private static final String dirName = "modpacks_defaults";
 
     public static void init(Path gameDir) {
-        LOGGER.info("Test: ConfigManager initialized successfully, path: {}", gameDir.toString());
+        LOGGER.debug("ConfigManager initialized successfully, path: {}", gameDir.toString());
 
         Path configDir = gameDir.resolve("config").resolve(dirName);
         if (!Files.exists(configDir)) {

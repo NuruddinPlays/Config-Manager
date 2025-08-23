@@ -1,12 +1,14 @@
 package io.github.thebossmagnus.mods.config_manager.common.screen;
 
 
+import io.github.thebossmagnus.mods.config_manager.common.AddFlagsUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.units.qual.A;
 
 
 public class Gui extends Screen {
@@ -36,13 +38,14 @@ public class Gui extends Screen {
     @Override
     protected void init() {
         Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
+            AddFlagsUtil.setUpdateFlag(true);
             LOGGER.info("The button can be pressed, wow^2!");
 
         }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
 
         Button b2 = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
             LOGGER.info("The button can be pressed, wow^2!");
-
+           AddFlagsUtil.setOverwriteFlag(true);
         }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
 
         Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
