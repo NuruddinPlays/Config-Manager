@@ -1,6 +1,6 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
-import org.slf4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;

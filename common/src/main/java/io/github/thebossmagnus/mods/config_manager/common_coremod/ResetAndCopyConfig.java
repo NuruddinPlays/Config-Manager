@@ -1,6 +1,6 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
-import org.slf4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,25 +32,7 @@ public final class ResetAndCopyConfig {
         } catch (IOException e) {
             throw new RuntimeException("Failed to clean config directory", e);
         }
-        try (Stream<Path> paths = Files.walk(defaultsDir)) {
-            paths.filter(path -> !path.equals(defaultsDir)).forEach(source -> {
-                Path relative = defaultsDir.relativize(source);
-                Path target = configDir.resolve(relative);
-                try {
-                    if (Files.isDirectory(source)) {
-                        Files.createDirectories(target);
-                    } else {
-                        Files.createDirectories(target.getParent());
-                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException("Error copying " + source + " to " + target, e);
-                }
-            });
-            logger.info("Config files re-setted");
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to copy modpack_defaults", e);
-        }
+        OverwriteConfig.run(gameDir, logger);
     }
 
     /**

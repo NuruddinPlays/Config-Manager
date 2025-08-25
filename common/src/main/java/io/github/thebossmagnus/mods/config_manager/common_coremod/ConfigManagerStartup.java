@@ -1,8 +1,9 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
+import org.apache.logging.log4j.LogManager;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +14,7 @@ import static io.github.thebossmagnus.mods.config_manager.common.Constants.LOGGE
  * Handles config management at startup based on flag files in the config directory.
  */
 public final class ConfigManagerStartup {
-    public static Logger logger = LoggerFactory.getLogger("config_manager");
+
 
     /**
      * Chooses config copy strategy based on flag files in config dir.
@@ -24,15 +25,16 @@ public final class ConfigManagerStartup {
         Path updateFlag = configDir.resolve("CONFIG_MANAGER_UPDATE_FLAG");
         try {
             if (Files.exists(resetFlag)) {
-                LOGGER.info("Reset flag detected, running ResetAndCopyConfig");
-                ResetAndCopyConfig.run(gameDir, logger);
+                LOGGER.info("Flag detected, running a config reset");
+                ResetAndCopyConfig.run(gameDir, LOGGER);
                 Files.deleteIfExists(resetFlag);
                 Files.deleteIfExists(updateFlag);
             } else if (Files.exists(updateFlag)) {
-                LOGGER.info("Update flag detected, running OverwriteConfig");
-                OverwriteConfig.run(gameDir, logger);
+                LOGGER.info("Flag detected, running a config update");
+                OverwriteConfig.run(gameDir, LOGGER);
                 Files.deleteIfExists(updateFlag);
             } else {
+                LOGGER.info("No flag found, running a usual copy");
                 CopyConfig.init(gameDir);
             }
         } catch (Exception e) {
