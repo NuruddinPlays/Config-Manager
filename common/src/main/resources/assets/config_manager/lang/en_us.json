@@ -1,10 +1,11 @@
 {
   "config_manager.title": "Manage modpacks config",
   "config_manager.close": "Close",
+  "config_manager.confirmation": "Are you sure?",
+  "config_manager.success": "To complete the operation restart your game",
   "config_manager.update_config": "Update modpack's configs",
   "config_manager.reset_config": "Reset modpack's configs",
-  "config_manager.confirmation": "Are you sure?",
-  "config_manager.warning.game_restart": "The game will be restarted",
+  "config_manager.warning.game_restart": "You will need to restart your game",
   "config_manager.warning.lose_some_config": "§eSome of your settings will be replaced with the modpack's defaults.§l Your current configs may be partially overwritten§r\n",
   "config_manager.warning.lose_all_config": "§c§lAll of your current configs will be deleted and replaced entirely with the modpack's defaults§r\n"
 }

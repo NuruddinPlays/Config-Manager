@@ -15,38 +15,49 @@ public class Gui extends Screen {
     public static final Logger LOGGER = LogManager.getLogger();
     private static final int buttonWidth = 150;
     private static final int buttonHeight = 20;
-
+    private final Component updateWarnings = Component.translatable("* %s\n* %s",
+            Component.translatable("config_manager.warning.lose_some_config"),
+            Component.translatable("config_manager.warning.game_restart")
+    );
+    private final Component resetWarnings = Component.translatable("* %s\n* %s",
+            Component.translatable("config_manager.warning.lose_all_config"),
+            Component.translatable("config_manager.warning.game_restart")
+    );
     private MultilineLabelWidget l1;
     private MultilineLabelWidget l2;
-
-
+    private boolean b1FirstClick = true;
+    private boolean b2FirstClick = true;
 
     public Gui(Screen screen) {
         super(Component.translatable("config_manager.title"));
     }
 
-    private final Component updateWarnings = Component.translatable("* %s\n* %s",
-        Component.translatable("config_manager.warning.lose_some_config"),
-        Component.translatable("config_manager.warning.game_restart")
-    );
-
-    private final Component resetWarnings = Component.translatable("* %s\n* %s",
-            Component.translatable("config_manager.warning.lose_all_config"),
-            Component.translatable("config_manager.warning.game_restart")
-    );
-
     @Override
     protected void init() {
-        Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
-            AddFlagsUtil.setUpdateFlag(true);
-            LOGGER.info("The button can be pressed, wow^2!");
 
-        }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
+
+        Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
+                    if (b1FirstClick) {
+                        btn.setMessage(Component.literal("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
+                        b1FirstClick = false;
+                    } else {
+                        AddFlagsUtil.setUpdateFlag(true);
+                        btn.setMessage(Component.literal("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                    }
+                }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7))
+                .size(buttonWidth, buttonHeight)
+                .build();
 
         Button b2 = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
-            LOGGER.info("The button can be pressed, wow^2!");
-           AddFlagsUtil.setOverwriteFlag(true);
-        }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth,buttonHeight).size(buttonWidth, buttonHeight).build();
+            if (b2FirstClick) {
+                btn.setMessage(Component.literal("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
+                b2FirstClick = false;
+            } else {
+                AddFlagsUtil.setOverwriteFlag(true);
+                btn.setMessage(Component.literal("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+            }
+
+        }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth, buttonHeight).size(buttonWidth, buttonHeight).build();
 
         Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
             this.onClose();
@@ -61,7 +72,7 @@ public class Gui extends Screen {
                 this.font,
                 updateWarnings,
                 (int) ((this.width - buttonWidth) * 0.15),
-                (int) ((this.height - buttonHeight) * 0.7)-90,
+                (int) ((this.height - buttonHeight) * 0.7) - 90,
                 buttonWidth,
                 true
         );
@@ -70,7 +81,7 @@ public class Gui extends Screen {
                 this.font,
                 resetWarnings,
                 (int) ((this.width - buttonWidth) * 0.9),
-                (int) ((this.height - buttonHeight) * 0.7)-90,
+                (int) ((this.height - buttonHeight) * 0.7) - 90,
                 buttonWidth,
                 true
         );
