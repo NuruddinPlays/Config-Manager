@@ -1,19 +1,18 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static io.github.thebossmagnus.mods.config_manager.common.Loaded.LOGGER;
+
 
 public final class CopyConfig {
 
     private static final String dirName = "modpacks_defaults";
 
     public static void init(Path gameDir) {
-        LOGGER.debug("ConfigManager initialized successfully, path: {}", gameDir.toString());
+
 
         Path configDir = gameDir.resolve("config").resolve(dirName);
         if (!Files.exists(configDir)) {

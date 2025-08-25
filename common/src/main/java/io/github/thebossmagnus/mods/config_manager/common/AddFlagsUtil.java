@@ -1,9 +1,8 @@
 package io.github.thebossmagnus.mods.config_manager.common;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.IOException;
-import io.github.thebossmagnus.mods.config_manager.common.Services;
 
 public class AddFlagsUtil {
 

@@ -6,13 +6,14 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static io.github.thebossmagnus.mods.config_manager.common.Loaded.LOGGER;
+
+import static io.github.thebossmagnus.mods.config_manager.common.Constants.LOGGER;
 
 /**
  * Handles config management at startup based on flag files in the config directory.
  */
 public final class ConfigManagerStartup {
-    public static Logger logger =  LoggerFactory.getLogger("config_manager");
+    public static Logger logger = LoggerFactory.getLogger("config_manager");
 
     /**
      * Chooses config copy strategy based on flag files in config dir.
@@ -21,7 +22,6 @@ public final class ConfigManagerStartup {
         Path configDir = gameDir.resolve("config");
         Path resetFlag = configDir.resolve("CONFIG_MANAGER_RESET_FLAG");
         Path updateFlag = configDir.resolve("CONFIG_MANAGER_UPDATE_FLAG");
-        LOGGER.info("Loaded: {}", gameDir);
         try {
             if (Files.exists(resetFlag)) {
                 LOGGER.info("Reset flag detected, running ResetAndCopyConfig");
@@ -33,7 +33,6 @@ public final class ConfigManagerStartup {
                 OverwriteConfig.run(gameDir, logger);
                 Files.deleteIfExists(updateFlag);
             } else {
-                LOGGER.info("No flag detected, running CopyConfig");
                 CopyConfig.init(gameDir);
             }
         } catch (Exception e) {

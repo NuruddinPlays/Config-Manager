@@ -1,8 +1,8 @@
 package io.github.thebossmagnus.mods.config_manager.common.screen;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -23,11 +23,11 @@ public class MultilineLabelWidget implements Renderable {
     /**
      * Constructs a MultilineLabelWidget.
      *
-     * @param font Font renderer used for drawing text
-     * @param text The text component to display (can contain formatting and siblings)
-     * @param x X position of the widget
-     * @param y Y position of the widget
-     * @param width Width of the widget (used for wrapping and centering)
+     * @param font     Font renderer used for drawing text
+     * @param text     The text component to display (can contain formatting and siblings)
+     * @param x        X position of the widget
+     * @param y        Y position of the widget
+     * @param width    Width of the widget (used for wrapping and centering)
      * @param centered Whether to center the text horizontally
      */
     public MultilineLabelWidget(Font font, Component text, int x, int y, int width, boolean centered) {
@@ -43,8 +43,8 @@ public class MultilineLabelWidget implements Renderable {
      * Renders the multi-line label with automatic word wrapping.
      *
      * @param guiGraphics The graphics context
-     * @param mouseX Mouse X position
-     * @param mouseY Mouse Y position
+     * @param mouseX      Mouse X position
+     * @param mouseY      Mouse Y position
      * @param partialTick Partial tick
      */
     @Override
@@ -71,7 +71,7 @@ public class MultilineLabelWidget implements Renderable {
             } else {
                 guiGraphics.drawString(font, line, drawX, currentY, 0xFFFFFFFF);
             }
-            currentY += font.lineHeight +1;
+            currentY += font.lineHeight + 1;
         }
     }
 }

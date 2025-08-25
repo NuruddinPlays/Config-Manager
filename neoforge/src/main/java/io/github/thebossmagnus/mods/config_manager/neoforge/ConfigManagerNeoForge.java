@@ -1,9 +1,6 @@
 package io.github.thebossmagnus.mods.config_manager.neoforge;
 
 import io.github.thebossmagnus.mods.config_manager.common.Constants;
-import io.github.thebossmagnus.mods.config_manager.common.Loaded;
-
-
 import net.neoforged.fml.common.Mod;
 
 
@@ -11,6 +8,5 @@ import net.neoforged.fml.common.Mod;
 public final class ConfigManagerNeoForge {
     public ConfigManagerNeoForge() {
 
-        Loaded.loade();
-}
+    }
 }

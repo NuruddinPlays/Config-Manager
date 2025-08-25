@@ -3,9 +3,10 @@ package io.github.thebossmagnus.mods.config_manager.common_coremod;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
-import static io.github.thebossmagnus.mods.config_manager.common.Loaded.LOGGER;
 
 /**
  * Copies config files from modpacks_defaults, overwriting any existing files in the config directory.

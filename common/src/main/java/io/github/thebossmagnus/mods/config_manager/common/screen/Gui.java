@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.checkerframework.checker.units.qual.A;
+import org.jetbrains.annotations.NotNull;
 
 
 public class Gui extends Screen {
@@ -38,11 +38,11 @@ public class Gui extends Screen {
 
         Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
                     if (b1FirstClick) {
-                        btn.setMessage(Component.literal("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
+                        btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
                         b1FirstClick = false;
                     } else {
                         AddFlagsUtil.setUpdateFlag(true);
-                        btn.setMessage(Component.literal("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                        btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
                     }
                 }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7))
                 .size(buttonWidth, buttonHeight)
@@ -50,11 +50,11 @@ public class Gui extends Screen {
 
         Button b2 = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
             if (b2FirstClick) {
-                btn.setMessage(Component.literal("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
+                btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
                 b2FirstClick = false;
             } else {
                 AddFlagsUtil.setOverwriteFlag(true);
-                btn.setMessage(Component.literal("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
             }
 
         }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth, buttonHeight).size(buttonWidth, buttonHeight).build();
@@ -88,7 +88,7 @@ public class Gui extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         if (l1 != null && l2 != null) {
             l1.render(guiGraphics, mouseX, mouseY, partialTick);

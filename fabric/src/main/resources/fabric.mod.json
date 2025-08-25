@@ -17,7 +17,9 @@
     "client": [
       "io.github.thebossmagnus.mods.config_manager.fabric.client.ConfigManagerFabricClient"
     ],
-    "modmenu": ["io.github.thebossmagnus.mods.config_manager.fabric.client.ModMenuCompat"]
+    "modmenu": [
+      "io.github.thebossmagnus.mods.config_manager.fabric.client.ModMenuCompat"
+    ]
   },
   "languageAdapters": {
     "config_manager": "io.github.thebossmagnus.mods.config_manager.fabric.ConfigManagerLanguageAdapter"

@@ -1,10 +1,11 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
-import io.github.thebossmagnus.mods.config_manager.common.Services;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 
@@ -27,7 +28,7 @@ public final class ResetAndCopyConfig {
         // Delete everything in config except modpacks_defaults
         try (Stream<Path> stream = Files.list(configDir)) {
             stream.filter(path -> !path.getFileName().toString().equals(DIR_NAME))
-                  .forEach(ResetAndCopyConfig::deleteRecursively);
+                    .forEach(ResetAndCopyConfig::deleteRecursively);
         } catch (IOException e) {
             throw new RuntimeException("Failed to clean config directory", e);
         }
@@ -54,6 +55,7 @@ public final class ResetAndCopyConfig {
 
     /**
      * Recursively deletes a file or directory.
+     *
      * @param path Path to delete.
      */
     private static void deleteRecursively(Path path) {
