@@ -36,14 +36,20 @@ public class AddFlagsUtil {
             try {
                 Files.createFile(flag);
             } catch (IOException e) {
-                throw new RuntimeException("Could not create CONFIG_MANAGER_UPDATE_FLAG", e);
+                if (!Files.exists(flag)) {
+                    throw new RuntimeException("Could not create CONFIG_MANAGER_UPDATE_FLAG", e);
+                }
+                // Ignore if file already exists
             }
         } else if (UPDATE_FLAG) {
             Path flag = gameDir.resolve("config").resolve("CONFIG_MANAGER_RESET_FLAG");
             try {
                 Files.createFile(flag);
             } catch (IOException e) {
-                throw new RuntimeException("Could not create CONFIG_MANAGER_RESET_FLAG", e);
+                if (!Files.exists(flag)) {
+                    throw new RuntimeException("Could not create CONFIG_MANAGER_RESET_FLAG", e);
+                }
+                // Ignore if file already exists
             }
         }
     }
