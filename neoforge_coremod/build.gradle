@@ -15,7 +15,7 @@ configurations {
 }
 
 base {
-    archivesName = "ConfigManager-neoforge-1.21.5-1.21.8"
+    archivesName = "ConfigManager-neoforge-1.20.4-1.21.x"
 }
 
 dependencies {
