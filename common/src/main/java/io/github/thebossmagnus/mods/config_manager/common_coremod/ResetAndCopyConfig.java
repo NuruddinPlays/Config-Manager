@@ -1,7 +1,6 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 import org.apache.logging.log4j.Logger;
-import static io.github.thebossmagnus.mods.config_manager.common_coremod.Constants.LOGGER;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,7 +43,6 @@ public final class ResetAndCopyConfig {
                 }
             }
             Files.deleteIfExists(path);
-            LOGGER.info("Deleted config directory {}", path);
         } catch (IOException e) {
             throw new RuntimeException("Failed to delete " + path, e);
         }

@@ -25,8 +25,8 @@ public class Gui extends Screen {
     );
     private MultilineLabelWidget l1;
     private MultilineLabelWidget l2;
-    private boolean b1FirstClick = true;
-    private boolean b2FirstClick = true;
+    private boolean updateFirstClick = true;
+    private boolean resetFirstClick = true;
 
     public Gui(Screen screen) {
         super(Component.translatable("config_manager.title"));
@@ -36,25 +36,27 @@ public class Gui extends Screen {
     protected void init() {
 
 
-        Button b1 = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
-                    if (b1FirstClick) {
+        Button updateButton = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
+                    if (updateFirstClick) {
                         btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
-                        b1FirstClick = false;
+                        updateFirstClick = false;
                     } else {
                         AddFlagsUtil.setUpdateFlag(true);
                         btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                        btn.active = false;
                     }
                 }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7))
                 .size(buttonWidth, buttonHeight)
                 .build();
 
-        Button b2 = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
-            if (b2FirstClick) {
+        Button resetButton = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
+            if (resetFirstClick) {
                 btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
-                b2FirstClick = false;
+                resetFirstClick = false;
             } else {
                 AddFlagsUtil.setOverwriteFlag(true);
                 btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                btn.active=false;
             }
 
         }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth, buttonHeight).size(buttonWidth, buttonHeight).build();
@@ -64,8 +66,8 @@ public class Gui extends Screen {
 
         }).pos((int) ((this.width - buttonWidth) * 0.5), (int) ((this.height - buttonHeight) * 0.95)).size(buttonWidth, buttonHeight).build();
 
-        this.addRenderableWidget(b2);
-        this.addRenderableWidget(b1);
+        this.addRenderableWidget(resetButton);
+        this.addRenderableWidget(updateButton);
         this.addRenderableWidget(closeButton);
 
         l1 = new MultilineLabelWidget(

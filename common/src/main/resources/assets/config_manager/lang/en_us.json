@@ -2,7 +2,7 @@
   "config_manager.title": "Manage modpacks config",
   "config_manager.close": "Close",
   "config_manager.confirmation": "Are you sure?",
-  "config_manager.success": "To complete the operation restart your game",
+  "config_manager.success": "Restart your game",
   "config_manager.update_config": "Update modpack's configs",
   "config_manager.reset_config": "Reset modpack's configs",
   "config_manager.warning.game_restart": "You will need to restart your game",
