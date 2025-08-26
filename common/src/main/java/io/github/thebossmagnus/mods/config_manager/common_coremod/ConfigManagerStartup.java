@@ -3,12 +3,11 @@ package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 
 
-import org.apache.logging.log4j.LogManager;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static io.github.thebossmagnus.mods.config_manager.common.Constants.LOGGER;
+import static io.github.thebossmagnus.mods.config_manager.common_coremod.Constants.LOGGER;
 
 /**
  * Handles config management at startup based on flag files in the config directory.

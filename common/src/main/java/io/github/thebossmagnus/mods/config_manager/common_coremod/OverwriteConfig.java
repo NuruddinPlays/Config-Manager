@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  * Copies config files from modpacks_defaults, overwriting any existing files in the config directory.
  */
 public final class OverwriteConfig {
-    private static final String DIR_NAME = "modpacks_defaults";
+    private static final String DIR_NAME = "modpack_defaults";
 
 
     public static void run(Path gameDir, Logger LOGGER) {
@@ -25,7 +25,7 @@ public final class OverwriteConfig {
         try (Stream<Path> paths = Files.walk(defaultsDir)) {
             paths.filter(path -> !path.equals(defaultsDir)).forEach(source -> {
                 Path relative = defaultsDir.relativize(source);
-                Path target = configDir.resolve(relative);
+                Path target = gameDir.resolve(relative);
                 try {
                     if (Files.isDirectory(source)) {
                         Files.createDirectories(target);

@@ -1,11 +1,11 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 import org.apache.logging.log4j.Logger;
+import static io.github.thebossmagnus.mods.config_manager.common_coremod.Constants.LOGGER;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 
@@ -13,17 +13,13 @@ import java.util.stream.Stream;
  * Deletes all config files except the modpacks_defaults directory, then copies configs from modpacks_defaults.
  */
 public final class ResetAndCopyConfig {
-    private static final String DIR_NAME = "modpacks_defaults";
+    private static final String DIR_NAME = "modpack_defaults";
 
     /**
      * Deletes all files and folders in config except modpacks_defaults, then copies files from modpacks_defaults.
      */
     public static void run(Path gameDir, Logger logger) {
         Path configDir = gameDir.resolve("config");
-        Path defaultsDir = configDir.resolve(DIR_NAME);
-        if (!Files.exists(defaultsDir)) {
-            return;
-        }
 
         // Delete everything in config except modpacks_defaults
         try (Stream<Path> stream = Files.list(configDir)) {
@@ -48,6 +44,7 @@ public final class ResetAndCopyConfig {
                 }
             }
             Files.deleteIfExists(path);
+            LOGGER.info("Deleted config directory {}", path);
         } catch (IOException e) {
             throw new RuntimeException("Failed to delete " + path, e);
         }
