@@ -9,13 +9,13 @@ import java.util.stream.Stream;
 
 
 /**
- * Deletes all config files except the modpacks_defaults directory, then copies configs from modpacks_defaults.
+ * Deletes all config files except the modpack_defaults directory, then copies configs from modpack_defaults.
  */
 public final class ResetAndCopyConfig {
     private static final String DIR_NAME = "modpack_defaults";
 
     /**
-     * Deletes all files and folders in config except modpacks_defaults, then copies files from modpacks_defaults.
+     * Deletes all files and folders in config except modpack_defaults, then copies files from modpacks_defaults.
      */
     public static void run(Path gameDir, Logger logger) {
         Path configDir = gameDir.resolve("config");

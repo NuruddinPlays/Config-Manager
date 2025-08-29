@@ -9,7 +9,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 /**
- * Copies config files from modpacks_defaults, overwriting any existing files in the config directory.
+ * Copies config files from modpack_defaults, overwriting any existing files in the config directory.
  */
 public final class OverwriteConfig {
     private static final String DIR_NAME = "modpack_defaults";

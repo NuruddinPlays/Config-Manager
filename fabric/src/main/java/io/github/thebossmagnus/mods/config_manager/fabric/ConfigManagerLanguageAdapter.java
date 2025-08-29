@@ -2,7 +2,6 @@ package io.github.thebossmagnus.mods.config_manager.fabric;
 
 
 import io.github.thebossmagnus.mods.config_manager.common_coremod.ConfigManagerStartup;
-import io.github.thebossmagnus.mods.config_manager.common_coremod.CopyConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.LanguageAdapter;
 import net.fabricmc.loader.api.LanguageAdapterException;

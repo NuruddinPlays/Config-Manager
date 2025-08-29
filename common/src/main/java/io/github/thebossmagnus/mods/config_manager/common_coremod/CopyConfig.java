@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 public final class CopyConfig {
 
-    private static final String dirName = "modpacks_defaults";
+    private static final String dirName = "modpack_defaults";
 
     public static void init(Path gameDir) {
 
