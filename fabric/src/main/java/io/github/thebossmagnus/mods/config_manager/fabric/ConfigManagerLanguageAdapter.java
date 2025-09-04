@@ -16,7 +16,7 @@ public class ConfigManagerLanguageAdapter implements LanguageAdapter {
     }
 
     @Override
-    public <T> T create(ModContainer mod, String value, Class<T> type) throws LanguageAdapterException {
+    public <T> T create(ModContainer mod, String value, Class<T> type) {
         return null;
     }
 }

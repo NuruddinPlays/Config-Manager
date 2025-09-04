@@ -9,18 +9,12 @@ public class AddFlagsUtil {
     private static final AtomicBoolean UPDATE_FLAG = new AtomicBoolean(false);
     private static final AtomicBoolean OVERWRITE_FLAG = new AtomicBoolean(false);
 
-    public static boolean isUpdateFlag() {
-        return UPDATE_FLAG.get();
-    }
 
     public static void setUpdateFlag(boolean updateFlag) {
         UPDATE_FLAG.set(updateFlag);
         addFlags();
     }
 
-    public static boolean isOverwriteFlag() {
-        return OVERWRITE_FLAG.get();
-    }
 
     public static void setOverwriteFlag(boolean overwriteFlag) {
         OVERWRITE_FLAG.set(overwriteFlag);

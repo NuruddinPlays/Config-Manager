@@ -8,7 +8,7 @@
     "${mod_author}"
   ],
   "license": "${license}",
-  "icon": "icon.png",
+  "icon": "assets/config_manager/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
