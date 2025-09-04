@@ -1,7 +1,5 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +15,7 @@ public final class ResetAndCopyConfig {
     /**
      * Deletes all files and folders in config except modpack_defaults, then copies files from modpacks_defaults.
      */
-    public static void run(Path gameDir, Logger logger) {
+    public static void run(Path gameDir) {
         Path configDir = gameDir.resolve("config");
 
         // Delete everything in config except modpacks_defaults
@@ -27,7 +25,7 @@ public final class ResetAndCopyConfig {
         } catch (IOException e) {
             throw new RuntimeException("Failed to clean config directory", e);
         }
-        OverwriteConfig.run(gameDir, logger);
+        OverwriteConfig.run(gameDir);
     }
 
     /**
@@ -48,4 +46,3 @@ public final class ResetAndCopyConfig {
         }
     }
 }
-

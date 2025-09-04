@@ -1,9 +1,6 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
 
-
-
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -25,12 +22,12 @@ public final class ConfigManagerStartup {
         try {
             if (Files.exists(resetFlag)) {
                 LOGGER.info("Flag detected, running a config reset");
-                ResetAndCopyConfig.run(gameDir, LOGGER);
+                ResetAndCopyConfig.run(gameDir);
                 Files.deleteIfExists(resetFlag);
                 Files.deleteIfExists(updateFlag);
             } else if (Files.exists(updateFlag)) {
                 LOGGER.info("Flag detected, running a config update");
-                OverwriteConfig.run(gameDir, LOGGER);
+                OverwriteConfig.run(gameDir);
                 Files.deleteIfExists(updateFlag);
             } else {
                 LOGGER.info("No flag found, running a usual copy");

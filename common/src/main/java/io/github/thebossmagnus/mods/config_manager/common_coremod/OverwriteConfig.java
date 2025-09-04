@@ -1,7 +1,5 @@
 package io.github.thebossmagnus.mods.config_manager.common_coremod;
 
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,8 +13,7 @@ public final class OverwriteConfig {
     private static final String DIR_NAME = "modpack_defaults";
 
 
-    public static void run(Path gameDir, Logger LOGGER) {
-
+    public static void run(Path gameDir) {
         Path configDir = gameDir.resolve("config");
         Path defaultsDir = configDir.resolve(DIR_NAME);
         if (!Files.exists(defaultsDir)) {
@@ -38,10 +35,9 @@ public final class OverwriteConfig {
                     throw new RuntimeException("Error copying " + source + " to " + target, e);
                 }
             });
-            LOGGER.info("Config files updated");
+            Constants.LOGGER.info("Config files updated");
         } catch (IOException e) {
             throw new RuntimeException("Failed to copy modpack_defaults", e);
         }
     }
 }
-

@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-
 public final class CopyConfig {
 
     private static final String dirName = "modpack_defaults";

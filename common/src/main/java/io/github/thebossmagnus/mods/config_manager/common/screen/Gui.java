@@ -2,17 +2,15 @@ package io.github.thebossmagnus.mods.config_manager.common.screen;
 
 
 import io.github.thebossmagnus.mods.config_manager.common.AddFlagsUtil;
+import io.github.thebossmagnus.mods.config_manager.common.Constants;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 
 public class Gui extends Screen {
-    public static final Logger LOGGER = LogManager.getLogger();
     private static final int buttonWidth = 150;
     private static final int buttonHeight = 20;
     private final Component updateWarnings = Component.translatable("* %s\n* %s",
@@ -34,36 +32,44 @@ public class Gui extends Screen {
 
     @Override
     protected void init() {
-
-
         Button updateButton = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
                     if (updateFirstClick) {
                         btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
                         updateFirstClick = false;
                     } else {
-                        AddFlagsUtil.setUpdateFlag(true);
-                        btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
-                        btn.active = false;
+                        try {
+                            AddFlagsUtil.setUpdateFlag(true);
+                            btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                            btn.active = false;
+                        } catch (Exception e) {
+                            Constants.LOGGER.error("Failed to set update flag", e);
+                            btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(0xFF0000)));
+                        }
                     }
                 }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7))
                 .size(buttonWidth, buttonHeight)
                 .build();
 
         Button resetButton = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
-            if (resetFirstClick) {
-                btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
-                resetFirstClick = false;
-            } else {
-                AddFlagsUtil.setOverwriteFlag(true);
-                btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
-                btn.active=false;
-            }
-
-        }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7)).size(buttonWidth, buttonHeight).size(buttonWidth, buttonHeight).build();
+                    if (resetFirstClick) {
+                        btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
+                        resetFirstClick = false;
+                    } else {
+                        try {
+                            AddFlagsUtil.setOverwriteFlag(true);
+                            btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
+                            btn.active = false;
+                        } catch (Exception e) {
+                            Constants.LOGGER.error("Failed to set overwrite flag", e);
+                            btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(0xFF0000)));
+                        }
+                    }
+                }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7))
+                .size(buttonWidth, buttonHeight)
+                .build();
 
         Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
             this.onClose();
-
         }).pos((int) ((this.width - buttonWidth) * 0.5), (int) ((this.height - buttonHeight) * 0.95)).size(buttonWidth, buttonHeight).build();
 
         this.addRenderableWidget(resetButton);
