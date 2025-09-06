@@ -93,7 +93,6 @@ processResources {
             'group'                         : project.group, //Else we target the task's group.
             'minecraft_version'             : minecraft_version,
             'minecraft_version_range_fabric': minecraft_version_range_fabric,
-            'fabric_version'                : fabric_version,
             'fabric_loader_version'         : fabric_loader_version,
             'mod_name'                      : mod_name,
             'mod_author'                    : mod_author,
@@ -103,7 +102,11 @@ processResources {
             'neoforge_version'              : neoforge_version,
             'neoforge_loader_version_range' : neoforge_loader_version_range,
             'credits'                       : credits,
-            'java_version'                  : java_version
+            'java_version'                  : java_version,
+            'mod_url'                       : mod_url,
+            'mod_sources'                   :mod_sources,
+            'mod_issue_tracker'             :mod_issue_tracker,
+            'minecraft_version_range_neoforge':minecraft_version_range_neoforge
     ]
 
     var jsonExpandProps = expandProps.collectEntries {
