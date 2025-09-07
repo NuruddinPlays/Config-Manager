@@ -33,27 +33,22 @@ public class AddFlagsUtil {
             throw new RuntimeException("Could not create config directory", e);
         }
         if (OVERWRITE_FLAG.get()) {
-            Path flag = configDir.resolve("CONFIG_MANAGER_RESET_FLAG");
-            try {
-                Files.createFile(flag);
-            } catch (IOException e) {
-                if (!Files.exists(flag)) {
-                    Constants.LOGGER.error("Could not create CONFIG_MANAGER_RESET_FLAG: {}", flag, e);
-                    throw new RuntimeException("Could not create CONFIG_MANAGER_RESET_FLAG", e);
-                }
-                // Ignore if file already exists
-            }
+            createFlagFile(configDir, "CONFIG_MANAGER_RESET_FLAG");
         } else if (UPDATE_FLAG.get()) {
-            Path flag = configDir.resolve("CONFIG_MANAGER_UPDATE_FLAG");
-            try {
-                Files.createFile(flag);
-            } catch (IOException e) {
-                if (!Files.exists(flag)) {
-                    Constants.LOGGER.error("Could not create CONFIG_MANAGER_UPDATE_FLAG: {}", flag, e);
-                    throw new RuntimeException("Could not create CONFIG_MANAGER_UPDATE_FLAG", e);
-                }
-                // Ignore if file already exists
+            createFlagFile(configDir, "CONFIG_MANAGER_UPDATE_FLAG");
+        }
+    }
+
+    private static void createFlagFile(Path configDir, String flagFileName) {
+        Path flag = configDir.resolve(flagFileName);
+        try {
+            Files.createFile(flag);
+        } catch (IOException e) {
+            if (!Files.exists(flag)) {
+                Constants.LOGGER.error("Could not create {}: {}", flagFileName, flag, e);
+                throw new RuntimeException("Could not create " + flagFileName, e);
             }
+            // Ignore if file already exists
         }
     }
 }

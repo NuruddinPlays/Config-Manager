@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 public class Gui extends Screen {
     private static final int buttonWidth = 150;
     private static final int buttonHeight = 20;
+    private static final int COLOR_RED = 0xFF0000;
+    private static final int COLOR_WHITE = 0xFFFFFF;
     private final Component updateWarnings = Component.translatable("* %s\n* %s",
             Component.translatable("config_manager.warning.lose_some_config"),
             Component.translatable("config_manager.warning.game_restart")
@@ -30,43 +32,43 @@ public class Gui extends Screen {
         super(Component.translatable("config_manager.title"));
     }
 
+    private Button createConfigButton(Component label, Runnable flagSetter, boolean isFirstClick, java.util.function.Consumer<Boolean> firstClickUpdater) {
+        return Button.builder(label, (btn) -> {
+            if (isFirstClick) {
+                btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(COLOR_RED)));
+                firstClickUpdater.accept(false);
+            } else {
+                try {
+                    flagSetter.run();
+                    btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(COLOR_WHITE)));
+                    btn.active = false;
+                } catch (Exception e) {
+                    Constants.LOGGER.error("Failed to set flag", e);
+                    btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(COLOR_RED)));
+                }
+            }
+        })
+        .size(buttonWidth, buttonHeight)
+        .build();
+    }
+
     @Override
     protected void init() {
-        Button updateButton = Button.builder(Component.translatable("config_manager.update_config"), (btn) -> {
-                    if (updateFirstClick) {
-                        btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
-                        updateFirstClick = false;
-                    } else {
-                        try {
-                            AddFlagsUtil.setUpdateFlag(true);
-                            btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
-                            btn.active = false;
-                        } catch (Exception e) {
-                            Constants.LOGGER.error("Failed to set update flag", e);
-                            btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(0xFF0000)));
-                        }
-                    }
-                }).pos((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7))
-                .size(buttonWidth, buttonHeight)
-                .build();
+        Button updateButton = createConfigButton(
+                Component.translatable("config_manager.update_config"),
+                () -> AddFlagsUtil.setUpdateFlag(true),
+                updateFirstClick,
+                (val) -> updateFirstClick = val
+        );
+        updateButton.setPosition((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7));
 
-        Button resetButton = Button.builder(Component.translatable("config_manager.reset_config"), (btn) -> {
-                    if (resetFirstClick) {
-                        btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(0xFF0000))); // Red
-                        resetFirstClick = false;
-                    } else {
-                        try {
-                            AddFlagsUtil.setOverwriteFlag(true);
-                            btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(0xFFFFFF)));
-                            btn.active = false;
-                        } catch (Exception e) {
-                            Constants.LOGGER.error("Failed to set overwrite flag", e);
-                            btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(0xFF0000)));
-                        }
-                    }
-                }).pos((int) ((this.width - buttonWidth) * 0.9), (int) ((this.height - buttonHeight) * 0.7))
-                .size(buttonWidth, buttonHeight)
-                .build();
+        Button resetButton = createConfigButton(
+                Component.translatable("config_manager.reset_config"),
+                () -> AddFlagsUtil.setOverwriteFlag(true),
+                resetFirstClick,
+                (val) -> resetFirstClick = val
+        );
+        resetButton.setPosition((int) ((this.width - buttonWidth) * 0.7), (int) ((this.height - buttonHeight) * 0.7));
 
         Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
             this.onClose();
@@ -88,7 +90,7 @@ public class Gui extends Screen {
         l2 = new MultilineLabelWidget(
                 this.font,
                 resetWarnings,
-                (int) ((this.width - buttonWidth) * 0.9),
+                (int) ((this.width - buttonWidth) * 0.7),
                 (int) ((this.height - buttonHeight) * 0.7) - 90,
                 buttonWidth,
                 true

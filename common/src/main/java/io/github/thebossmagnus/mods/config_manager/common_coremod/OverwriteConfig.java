@@ -10,12 +10,12 @@ import java.util.stream.Stream;
  * Copies config files from modpack_defaults, overwriting any existing files in the config directory.
  */
 public final class OverwriteConfig {
-    private static final String DIR_NAME = "modpack_defaults";
+
 
 
     public static void run(Path gameDir) {
         Path configDir = gameDir.resolve("config");
-        Path defaultsDir = configDir.resolve(DIR_NAME);
+        Path defaultsDir = configDir.resolve(Constants.DIR_NAME);
         if (!Files.exists(defaultsDir)) {
             return;
         }

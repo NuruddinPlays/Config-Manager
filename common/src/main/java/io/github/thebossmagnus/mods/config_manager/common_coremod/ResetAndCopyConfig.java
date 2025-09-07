@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * Deletes all config files except the modpack_defaults directory, then copies configs from modpack_defaults.
  */
 public final class ResetAndCopyConfig {
-    private static final String DIR_NAME = "modpack_defaults";
+
 
     /**
      * Deletes all files and folders in config except modpack_defaults, then copies files from modpacks_defaults.
@@ -20,7 +20,7 @@ public final class ResetAndCopyConfig {
 
         // Delete everything in config except modpacks_defaults
         try (Stream<Path> stream = Files.list(configDir)) {
-            stream.filter(path -> !path.getFileName().toString().equals(DIR_NAME))
+            stream.filter(path -> !path.getFileName().toString().equals(Constants.DIR_NAME))
                     .forEach(ResetAndCopyConfig::deleteRecursively);
         } catch (IOException e) {
             throw new RuntimeException("Failed to clean config directory", e);

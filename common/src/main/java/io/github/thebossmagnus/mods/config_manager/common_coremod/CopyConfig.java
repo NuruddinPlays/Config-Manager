@@ -5,23 +5,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static io.github.thebossmagnus.mods.config_manager.common_coremod.Constants.DIR_NAME;
+
 
 public final class CopyConfig {
-
-    private static final String dirName = "modpack_defaults";
 
     public static void init(Path gameDir) {
 
 
-        Path configDir = gameDir.resolve("config").resolve(dirName);
+        Path configDir = gameDir.resolve("config").resolve(DIR_NAME);
         if (!Files.exists(configDir)) {
             return;
         }
 
         // Avoid overriding the modpack configs
-        Path nestedDir = configDir.resolve(dirName);
+        Path nestedDir = configDir.resolve(DIR_NAME);
         if (Files.exists(nestedDir)) {
-            throw new RuntimeException(String.format("A subfolder called \"%s\" is inside config/%s: %s", dirName, dirName, nestedDir));
+            throw new RuntimeException(String.format("A subfolder called \"%s\" is inside config/%s: %s", DIR_NAME, DIR_NAME, nestedDir));
         }
 
 
