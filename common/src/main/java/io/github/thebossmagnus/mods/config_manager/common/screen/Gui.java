@@ -23,28 +23,32 @@ public class Gui extends Screen {
             Component.translatable("config_manager.warning.lose_all_config"),
             Component.translatable("config_manager.warning.game_restart")
     );
-    private MultilineLabelWidget l1;
-    private MultilineLabelWidget l2;
-    private boolean updateFirstClick = true;
-    private boolean resetFirstClick = true;
 
+    private MultilineLabelWidget updateWarningsLabel;
+    private MultilineLabelWidget resetWarningsLabel;
+
+    @SuppressWarnings("unused")
     public Gui(Screen screen) {
         super(Component.translatable("config_manager.title"));
     }
 
-    private Button createConfigButton(Component label, Runnable flagSetter, boolean isFirstClick, java.util.function.Consumer<Boolean> firstClickUpdater) {
+    private Button createConfigButton(Component label, Runnable flagSetter) {
+        // Use a local mutable state for each button
+        final boolean[] isFirstClick = {true};
         return Button.builder(label, (btn) -> {
-            if (isFirstClick) {
+            if (isFirstClick[0]) {
                 btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(COLOR_RED)));
-                firstClickUpdater.accept(false);
+                isFirstClick[0] = false;
             } else {
                 try {
+                    btn.active = false;
                     flagSetter.run();
                     btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(COLOR_WHITE)));
-                    btn.active = false;
+                    Constants.LOGGER.info("Flag Added");
                 } catch (Exception e) {
-                    Constants.LOGGER.error("Failed to set flag", e);
+                    Constants.LOGGER.error("Failed to add flag", e);
                     btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(COLOR_RED)));
+                    btn.active = false;
                 }
             }
         })
@@ -56,19 +60,15 @@ public class Gui extends Screen {
     protected void init() {
         Button updateButton = createConfigButton(
                 Component.translatable("config_manager.update_config"),
-                () -> AddFlagsUtil.setUpdateFlag(true),
-                updateFirstClick,
-                (val) -> updateFirstClick = val
+                () -> AddFlagsUtil.setUpdateFlag(true)
         );
-        updateButton.setPosition((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.7));
+        updateButton.setPosition((int) ((this.width - buttonWidth) * 0.15), (int) ((this.height - buttonHeight) * 0.6));
 
         Button resetButton = createConfigButton(
                 Component.translatable("config_manager.reset_config"),
-                () -> AddFlagsUtil.setOverwriteFlag(true),
-                resetFirstClick,
-                (val) -> resetFirstClick = val
+                () -> AddFlagsUtil.setOverwriteFlag(true)
         );
-        resetButton.setPosition((int) ((this.width - buttonWidth) * 0.7), (int) ((this.height - buttonHeight) * 0.7));
+        resetButton.setPosition((int) ((this.width - buttonWidth) * 0.85), (int) ((this.height - buttonHeight) * 0.6));
 
         Button closeButton = Button.builder(Component.translatable("config_manager.close"), (btn) -> {
             this.onClose();
@@ -78,20 +78,20 @@ public class Gui extends Screen {
         this.addRenderableWidget(updateButton);
         this.addRenderableWidget(closeButton);
 
-        l1 = new MultilineLabelWidget(
+        updateWarningsLabel = new MultilineLabelWidget(
                 this.font,
                 updateWarnings,
                 (int) ((this.width - buttonWidth) * 0.15),
-                (int) ((this.height - buttonHeight) * 0.7) - 90,
+                (int) ((this.height - buttonHeight) * 0.6) - 90,
                 buttonWidth,
                 true
         );
 
-        l2 = new MultilineLabelWidget(
+        resetWarningsLabel = new MultilineLabelWidget(
                 this.font,
                 resetWarnings,
-                (int) ((this.width - buttonWidth) * 0.7),
-                (int) ((this.height - buttonHeight) * 0.7) - 90,
+                (int) ((this.width - buttonWidth) * 0.85),
+                (int) ((this.height - buttonHeight) * 0.6) - 90,
                 buttonWidth,
                 true
         );
@@ -100,11 +100,10 @@ public class Gui extends Screen {
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        if (l1 != null && l2 != null) {
-            l1.render(guiGraphics, mouseX, mouseY, partialTick);
-            l2.render(guiGraphics, mouseX, mouseY, partialTick);
-        }
+        updateWarningsLabel.render(guiGraphics, mouseX, mouseY, partialTick);
+        resetWarningsLabel.render(guiGraphics, mouseX, mouseY, partialTick);
     }
+
 
 
     @Override
