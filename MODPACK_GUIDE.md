@@ -27,7 +27,7 @@ Setup is straightforward:
 
 **Q: Can I force an update or reset of user configs?**  
 **A:** You can do this by placing a file named `CONFIG_MANAGER_UPDATE_FLAG` or `CONFIG_MANAGER_RESET_FLAG` in the `config` directory.  
-**Not recommended.**
+**Still, this is not recommended.**
 
 ---
 
