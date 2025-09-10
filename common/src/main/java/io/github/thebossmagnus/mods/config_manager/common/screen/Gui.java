@@ -36,24 +36,24 @@ public class Gui extends Screen {
         // Use a local mutable state for each button
         final boolean[] isFirstClick = {true};
         return Button.builder(label, (btn) -> {
-            if (isFirstClick[0]) {
-                btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(COLOR_RED)));
-                isFirstClick[0] = false;
-            } else {
-                try {
-                    btn.active = false;
-                    flagSetter.run();
-                    btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(COLOR_WHITE)));
-                    Constants.LOGGER.info("Flag Added");
-                } catch (Exception e) {
-                    Constants.LOGGER.error("Failed to add flag", e);
-                    btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(COLOR_RED)));
-                    btn.active = false;
-                }
-            }
-        })
-        .size(buttonWidth, buttonHeight)
-        .build();
+                    if (isFirstClick[0]) {
+                        btn.setMessage(Component.translatable("config_manager.confirmation").withStyle(style -> style.withColor(COLOR_RED)));
+                        isFirstClick[0] = false;
+                    } else {
+                        try {
+                            btn.active = false;
+                            flagSetter.run();
+                            btn.setMessage(Component.translatable("config_manager.success").withStyle(style -> style.withColor(COLOR_WHITE)));
+                            Constants.LOGGER.info("Flag Added");
+                        } catch (Exception e) {
+                            Constants.LOGGER.error("Failed to add flag", e);
+                            btn.setMessage(Component.translatable("config_manager.error").withStyle(style -> style.withColor(COLOR_RED)));
+                            btn.active = false;
+                        }
+                    }
+                })
+                .size(buttonWidth, buttonHeight)
+                .build();
     }
 
     @Override
@@ -99,11 +99,11 @@ public class Gui extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderDirtBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        updateWarningsLabel.render(guiGraphics, mouseX, mouseY, partialTick);
         resetWarningsLabel.render(guiGraphics, mouseX, mouseY, partialTick);
+        updateWarningsLabel.render(guiGraphics, mouseX, mouseY, partialTick);
     }
-
 
 
     @Override

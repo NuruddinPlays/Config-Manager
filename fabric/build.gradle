@@ -5,7 +5,7 @@ plugins {
 }
 
 base {
-    archivesName = "ConfigManager-${project.name}-1.20.4-1.21.x"
+    archivesName = "ConfigManager-${project.name}-1.20.1"
 }
 
 configurations {
