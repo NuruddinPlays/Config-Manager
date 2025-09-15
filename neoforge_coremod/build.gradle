@@ -84,7 +84,7 @@ unifiedPublishing {
         gameLoaders = ["neoforge"]
 
 
-        displayName = "ConfigManager ${project.version} NeoForge"
+        displayName = "Config Manager ${project.version} NeoForge"
         version = project.version
         changelog = file('../CHANGELOG.md').text
         releaseType = release_type
