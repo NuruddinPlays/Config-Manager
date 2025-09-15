@@ -86,7 +86,7 @@ unifiedPublishing {
 
         displayName = "ConfigManager ${project.version} NeoForge"
         version = project.version
-        changelog = file('../changelog.md').text
+        changelog = file('../CHANGELOG.md').text
         releaseType = release_type
 
         mainPublication tasks.jar

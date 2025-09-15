@@ -70,8 +70,14 @@ unifiedPublishing {
 
         displayName = "ConfigManager ${project.version} Fabric"
         version = project.version
-        changelog = file('../changelog.md').text
+        changelog = file('../CHANGELOG.md').text
         releaseType = release_type
+        relations {
+            depends {
+                curseforge = "modmenu"
+                modrinth = "modmenu"
+            }
+        }
 
         mainPublication tasks.remapJar
 
