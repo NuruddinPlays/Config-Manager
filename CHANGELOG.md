@@ -1,1 +1,1 @@
-First stable release
+* Do not mark this as compatible for 1.21.4 and 1.21.5
