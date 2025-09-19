@@ -1,5 +1,9 @@
 # Config Manager
 
+Download it from:
+* [Modrinth](https://modrinth.com/mod/configmanager)
+* [CurseForge](https://curseforge.com/minecraft/mc-mods/configmanager)
+
 **Config Manager** is a Minecraft mod that allows modpack developers to ship configuration files in a simple and user-friendly way.  
 It supports both **NeoForge** and **Fabric**, starting from **Minecraft 1.20.1** and newer.
 
