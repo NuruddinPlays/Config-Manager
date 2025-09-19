@@ -16,6 +16,8 @@ Setup is straightforward:
 │ │ └─ config/
 │ │ └─ myMod.json (the "real" one)
 
+This is an [example implementation](https://github.com/TheBossMagnus/Thunder) (my modpack).
+
 ---
 
 ## FAQ
